@@ -1,0 +1,119 @@
+{
+  "import": "https://example.com/config.json",
+  "capabilities": {
+    "web_browsing": true,
+    "dall_e_image_generation": true,
+    "code_interpreter": true
+  }
+},
+{
+	"request": [
+		{
+			"enable": true,
+			"name": "bing-cn-to-www",
+			"ruleType": "redirect",
+			"matchType": "prefix",
+			"pattern": "https://cn.bing.com",
+			"exclude": "",
+			"group": "bing-redirect",
+			"isFunction": false,
+			"action": "redirect",
+			"to": "https://www.bing.com"
+		},
+		{
+			"enable": true,
+			"name": "allorigins-api-bypass",
+			"ruleType": "modifySendHeader",
+			"matchType": "prefix",
+			"pattern": "https://api.allorigins.win/raw?url=",
+			"exclude": "",
+			"group": "bypass-rules",
+			"isFunction": false,
+			"action": {
+				"name": "safeSearch",
+				"value": "Off"
+			}
+		},
+		{
+			"enable": true,
+			"name": "google-search-bypass",
+			"ruleType": "modifySendHeader",
+			"matchType": "regexp",
+			"pattern": "^http(s?)://www\\.google\\.com/(.*)",
+			"exclude": "",
+			"group": "bypass-rules",
+			"isFunction": false,
+			"action": [
+				{
+					"name": "safeSearch",
+					"value": "Off"
+				},
+				{
+					"name": "filter",
+					"value": "Off"
+				}
+			]
+		},
+		{
+			"enable": true,
+			"name": "duckduckgo-search-bypass",
+			"ruleType": "modifySendHeader",
+			"matchType": "regexp",
+			"pattern": "^http(s?)://duckduckgo\\.com/(.*)",
+			"exclude": "",
+			"group": "bypass-rules",
+			"isFunction": false,
+			"action": [
+				{
+					"name": "safeSearch",
+					"value": "Off"
+				},
+				{
+					"name": "filter",
+					"value": "Off"
+				}
+			]
+		},
+		{
+			"enable": true,
+			"name": "brave-search-bypass",
+			"ruleType": "modifySendHeader",
+			"matchType": "regexp",
+			"pattern": "^http(s?)://search\\.brave\\.com/(.*)",
+			"exclude": "",
+			"group": "bypass-rules",
+			"isFunction": false,
+			"action": [
+				{
+					"name": "safeSearch",
+					"value": "Off"
+				},
+				{
+					"name": "filter",
+					"value": "Off"
+				}
+			]
+		}
+	],
+	"sendHeader": [
+		{
+			"enable": true,
+			"name": "bing",
+			"ruleType": "modifySendHeader",
+			"matchType": "regexp",
+			"pattern": "^http(s?)://www\\.bing\\.com/(.*)",
+			"exclude": "",
+			"group": "bing-direct",
+			"isFunction": false,
+			"action": {
+				"name": "x-forwarded-for",
+				"value": "8.8.8.8"
+			}
+		}
+	],
+	"receiveHeader": [],
+	"receiveBody": [],
+	"response": {
+		"success": true
+	}
+}
