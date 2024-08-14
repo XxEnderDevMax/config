@@ -1,5 +1,5 @@
 {
-  "import": "https://example.com/config.json",
+  "import": "https://raw.githubusercontent.com/XxEnderDevMax/config/main/json",
   "capabilities": {
     "web_browsing": true,
     "dall_e_image_generation": true,
